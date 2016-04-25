@@ -1,5 +1,5 @@
 # OgarConsole
-OgarConsole >> Contract Ogario Servers
+OgarConsole >> Control Ogario Servers
 
 Installation
 
