@@ -1,2 +1,0 @@
-node cmd.js
-pause
