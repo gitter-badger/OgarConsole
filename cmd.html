@@ -1,0 +1,53 @@
+<html>
+
+	<head>
+	
+		<title>CMD</title>
+		
+		<script type="text/javascript" src="/socket.io/socket.io.js"/></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	
+	</head>
+	
+	<body>
+	
+		<div id="CMD">
+			<form>
+				<textarea style="height: 50%; width: 100%; "name="console" class="console" readonly></textarea><br/>
+				<input style="width: 100%; " type="text" name="input" class="input" placeholder="input"/><br/>
+				<input style="width: 100%; " type="submit" value="Send Command"/>
+			</form>
+		</div>
+		
+		<script>
+		
+		$(document).ready(function(){
+		
+			$("form").submit(function(e){
+			
+				e.preventDefault();
+				
+				var socket = io.connect();
+				var output = $("textarea");
+				var input = $(".input");
+				
+				socket.emit("commandex", input.val());
+				input.val('');
+				
+				socket.on('input', function(data){
+				
+					output.append(data);
+					$('textarea').scrollTop($('textarea')[0].scrollHeight);
+					
+				});
+				
+			
+			});
+		
+		});
+		
+		</script>
+		
+	</body>
+
+</html>

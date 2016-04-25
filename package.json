@@ -1,0 +1,17 @@
+{
+
+	"name":"OgarConsole",
+	"version":"1.0.0",
+	"description":"Ogar Console >> Control Your Servers",
+	"main":"cmd.js",
+	"description":{
+	
+		"express" : "^4.13.4",
+		"http" : "^0.0.0",
+		"socket.io" : "^1.4.5",
+		"node-cmd" : "^1.1.1",
+		"fs" : "^0.0.0"
+	
+	}
+
+}
