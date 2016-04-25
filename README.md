@@ -9,7 +9,7 @@ Installation
 - run command 'npm install' dependencies(express, http, socket.io, node-cmd, fs)
 
 
-Run Start-Windows.bat
+Run 'startconsole.bat'
 
 open browser to http://127.0.0.1:1000
 
