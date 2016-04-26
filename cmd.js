@@ -1,23 +1,18 @@
+'use strict'
 // Console port.
 var serverport = 1000,
     advanced = false,
     // ./index is the start script.
     ogar = require('./index'),
     express = require("express"),
-    Commands = require('./modules/CommandList'),
     app = express(),
     fs = require("fs"),
     server = require('http').createServer(app),
     io = require("socket.io").listen(server),
-    GameServer = require("./GameServer"),
     exec = require('child_process').exec;
 // Run Ogar
-var gameServer = new GameServer();
-var cache;
-gameServer.start(ogar.Version);
 // Add command handler
-gameServer.commands = Commands.list;
-module.exports = GameServer;
+var gameServer = ogar.gameServer;
 // Listen for console
 server.listen(serverport);
 console.log("[Console] Console running port " + serverport);
@@ -45,18 +40,10 @@ io.sockets.on("connection", function(socket) {
                         err, data) {
                         var a = data.toString();
                         var clog = a.split("\n");
-                        for (var i in clog) {
-                            if (i < clog.length) {
-                                socket.emit("input",
-                                    clog[i]);
-                            }
-                        }
+                        socket.emit("input", a);
                     })
                 } else {
                     console.log(
-                        "[Console] Invalid Command, try 'help' for a list of commands."
-                    );
-                    socket.emit("input", "&#013;&#010;" +
                         "[Console] Invalid Command, try 'help' for a list of commands."
                     );
                 }
@@ -65,12 +52,6 @@ io.sockets.on("connection", function(socket) {
                     "[ERROR] Oh my, there seems to be an error with the command " +
                     first);
                 console.log(
-                    "[ERROR] Please alert AJS dev with this message:\n" +
-                    e);
-                socket.emit("input", "&#013;&#010;&#013;&#010" +
-                    "[ERROR] Oh my, there seems to be an error with the command " +
-                    first);
-                socket.emit("input", "&#013;&#010;&#013;&#010" +
                     "[ERROR] Please alert AJS dev with this message:\n" +
                     e);
             }
