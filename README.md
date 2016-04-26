@@ -6,7 +6,7 @@ OgarConsole Server Controller.
 
 Ogar tested - works
 
-Ogar Unlimited tested - works (11.9.0 ONLY)
+Ogar Unlimited tested - works ( < 11.9.0  ONLY. Ogar Unlimited 11.9.0 Included )
 
 Ogar Unlimited Latest - Under Development After Stable Release
 
