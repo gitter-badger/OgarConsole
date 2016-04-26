@@ -11,7 +11,7 @@ Ogar Unlimited tested - works
 Ogar-Plus tested - works (Change serverLogLevel = 1)
 
 
-[Install The Game Before Install OgarConsole]
+[Install The Game Before Installing OgarConsole]
 
 *Installation*
 
