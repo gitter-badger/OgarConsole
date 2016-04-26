@@ -1,138 +1,116 @@
+<!DOCTYPE html>
 <html>
+<head>
+    <title>CMD</title><script src="/socket.io/socket.io.js" type=
+    "text/javascript"></script>
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+    </script>
+</head>
+<body style="margin: 0;">
+    <div id="CMD">
+        <form>
+            <textarea class="console" name="console" readonly style=
+            "height: 50%; width: 100%; color: green; background-color: black;">Type 'help' for commands</textarea><br>
 
-	<head>
-	
-		<title>CMD</title>
-		
-		<script type="text/javascript" src="/socket.io/socket.io.js"/></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	
-	</head>
-	
-	<body style="margin: 0;">
-	
-		<div id="CMD">
-			<form>
-				<textarea style="height: 50%; width: 100%; color: green; background-color: black; "name="console" class="console" readonly>Type 'help' for commands</textarea><br/>
-				<input style="width: 100%; color: black; " type="text" name="input" class="input" placeholder="input"/><br/>
-				<input style="width: 100%; " type="submit" value="Send Command"/>
-			</form>
-			<br/>
-			<p>Created By LegitSoulja<br/> Sponsers <a href="//agariohub.tk" target="_blank">agariohub.tk</a> </p>
-		</div>
-		
-		<div class="help" style="display:none;">
-[Console] ======================== HELP ======================
-[Console] ophelp     : Shows OP help
-[Console] addbot     : add bot to the server
-[Console] kickbots   : kick a specified amount of bots
-[Console] Blind      : makes a player not able to see others
-[Console] board      : set scoreboard text
-[Console] Restart    : Restart server or set time till restart
-[Console] Announce   : Starts the auto announce for high scores
-[Console] boardreset : reset scoreboard text
-[Console] change     : change specified settings
-[Console] clear      : clear console output
-[Console] hide       : Hides a player (invisibility)
-[Console] color      : set cell(s) color by client ID
-[Console] exit       : stop the server
-[Console] food       : spawn food at specified Location
-[Console] Freeze     : Freezes a player
-[Console] spawnmass  : sets players spawn mass
-[Console] Pcmd       : Periodical commands
-[Console] gamemode   : change server gamemode
-[Console] kick       : kick player or bot by client ID
-[Console] kill       : kill cell(s) by client ID
-[Console] Reset      : Destroys everything and starts from scratch
-[Console] killall    : kill everyone
-[Console] mass       : set cell(s) mass by client ID
-[Console] name       : change cell(s) name by client ID
-[Console] playerlist : get list of players and bots
-[Console] pause      : pause game , freeze all cells
-[Console] reload     : reload config
-[Console] Speed      : Sets a players base speed
-[Console] status     : get server status
-[Console] tp         : teleport player to specified location
-[Console] virus      : spawn virus at a specified Location
-[Console] Kickrange  : kicks in a ID range
-[Console] Killrange  : kills in a ID range
-[Console] Verify     : EasyVerify command
-[Console] Banrange   : Bans in a ID range
-[Console] Merge      : Forces that player to merge
-[Console] Nojoin     : Prevents the player from merging
-[Console] Msg        : Sends a message
-[Console] Killbots   : Kills bots
-[Console] Fmsg       : Sends a Force Message
-[Console] Pmsg       : Periodically sends a message
-[Console] Spmsg      : Stops any Pmsg proccess
-[Console] Pfmsg      : Periodically sends a force message
-[Console] Sfpmsg     : Stops any Pfmsg proccess
-[Console] Rop        : Resets op
-[Console] Range      : does bulk command with players
-[Console] Op         : Makes that player OP
-[Console] Dop        : De-Ops a player
-[Console] Opbyip     : Allows ypu to control the opbyip feature
-[Console] Ban        : Bans an IP and senda a msg saying that person was banned
-[Console] Banlist    : Lists banned IPs
-[Console] Clearban   : Resets Ban list
-[Console] Resetvirus : Turns special viruses (from op's) into normal ones
-[Console] Split      : Splits a player
-[Console] Minion     : Creates minions that suicide into you
-[Console] Team       : Changes a players Team
-[Console] Colortext  : changes text style
-[Console] Shrink     : Shrinks the game
-[Console] Enlarge    : Enlargens the game
-[Console] Explode    : Explodes a player
-[Console] Resetateam : Resets anti team effect for a player
-[Console] Rainbow    : Gives rainbow effect to a player
-[Console] Update     : Updates server to the latest version
-[Console] changelog  : Shows a changelog
-[Console] ====================================================
-		</div>
-		
-		<script>
-		
-		$(document).ready(function(){
-		
-			$("form").submit(function(e){
-			
-				e.preventDefault();
-				
-				var socket = io.connect();
-				var output = $("textarea");
-				var input = $(".input");
-				var help = $(".help").html();
-				
-				if(input.val() == "help"){
-				
-				output.append("\n" + help);
-					return;
-				
-				}
-				
-				socket.emit("commandex", input.val());
-				input.val('');
-				
-				socket.on('input', function(data){
-					
-					output.append(data);
-					$('textarea').scrollTop($('textarea')[0].scrollHeight);
-					
-				});
-				
-				
-				
-				
-			
-			});
-			
-		});
-		
-		</script>
-		
-	</body>
-	
-	<!-- CopyRight, LegitSoulja. In Use Of AgarioHub.TK Servers -->
-	<!-- GITHUB >> https://github.com/LegitSoulja/OgarConsole/blob/master/cmd.html -->
-
+            <input class="input" name="input" placeholder="input" style=
+            "width: 100%; color: black;" type="text"><br>
+            <input style="width: 100%;" type="submit" value="Send Command">
+        </form><br>
+        <p>Created By LegitSoulja<br>
+        Sponsers <a href="//agariohub.tk" target="_blank">agariohub.tk</a></p>
+    </div>
+    <div class="help" style="display:none;">
+        [Console] ======================== HELP ======================
+        [Console] ophelp : Shows OP help [Console] addbot : add bot to the
+        server [Console] kickbots : kick a specified amount of bots [Console]
+        Blind : makes a player not able to see others [Console] board : set
+        scoreboard text [Console] Restart : Restart server or set time till
+        restart [Console] Announce : Starts the auto announce for high scores
+        [Console] boardreset : reset scoreboard text [Console] change : change
+        specified settings [Console] clear : clear console output [Console]
+        hide : Hides a player (invisibility) [Console] color : set cell(s)
+        color by client ID [Console] exit : stop the server [Console] food :
+        spawn food at specified Location [Console] Freeze : Freezes a player
+        [Console] spawnmass : sets players spawn mass [Console] Pcmd :
+        Periodical commands [Console] gamemode : change server gamemode
+        [Console] kick : kick player or bot by client ID [Console] kill : kill
+        cell(s) by client ID [Console] Reset : Destroys everything and starts
+        from scratch [Console] killall : kill everyone [Console] mass : set
+        cell(s) mass by client ID [Console] name : change cell(s) name by
+        client ID [Console] playerlist : get list of players and bots [Console]
+        pause : pause game , freeze all cells [Console] reload : reload config
+        [Console] Speed : Sets a players base speed [Console] status : get
+        server status [Console] tp : teleport player to specified location
+        [Console] virus : spawn virus at a specified Location [Console]
+        Kickrange : kicks in a ID range [Console] Killrange : kills in a ID
+        range [Console] Verify : EasyVerify command [Console] Banrange : Bans
+        in a ID range [Console] Merge : Forces that player to merge [Console]
+        Nojoin : Prevents the player from merging [Console] Msg : Sends a
+        message [Console] Killbots : Kills bots [Console] Fmsg : Sends a Force
+        Message [Console] Pmsg : Periodically sends a message [Console] Spmsg :
+        Stops any Pmsg proccess [Console] Pfmsg : Periodically sends a force
+        message [Console] Sfpmsg : Stops any Pfmsg proccess [Console] Rop :
+        Resets op [Console] Range : does bulk command with players [Console] Op
+        : Makes that player OP [Console] Dop : De-Ops a player [Console] Opbyip
+        : Allows ypu to control the opbyip feature [Console] Ban : Bans an IP
+        and senda a msg saying that person was banned [Console] Banlist : Lists
+        banned IPs [Console] Clearban : Resets Ban list [Console] Resetvirus :
+        Turns special viruses (from op's) into normal ones [Console] Split :
+        Splits a player [Console] Minion : Creates minions that suicide into
+        you [Console] Team : Changes a players Team [Console] Colortext :
+        changes text style [Console] Shrink : Shrinks the game [Console]
+        Enlarge : Enlargens the game [Console] Explode : Explodes a player
+        [Console] Resetateam : Resets anti team effect for a player [Console]
+        Rainbow : Gives rainbow effect to a player [Console] Update : Updates
+        server to the latest version [Console] changelog : Shows a changelog
+        [Console] ====================================================
+    </div>
+    <script>
+        
+        $(document).ready(function() {
+            var socket = io.connect();
+            var socket = io.connect();
+            var output = $("textarea");
+            var input = $(".input");
+            var help = $(".help").html();
+            var f = false;
+            socket.on("disconnect", function(err) {
+                output.append("\n" + "Console Disconnected.");
+            });
+            socket.on("connect", function(err) {
+                output.append("\n" + "Console Connected.");
+            })
+            $("form").submit(function(e) {
+                e.preventDefault();
+                if (input.val() == "help") {
+                    input.val('');
+                    output.append("\n" + help);
+                    return;
+                }
+                if (input.val() == "clr" || input.val() ==
+                    "clear") {
+                    input.val('');
+                    output.empty();
+                    return;
+                }
+                socket.emit("commandex", input.val());
+                input.val('');
+                socket.on('input', function(data) {
+                    if (!f) {
+                        output.empty();
+                        f = true;
+                    }
+                    f = true;
+                    output.append("\n" + data);
+                    $('textarea').scrollTop($(
+                        'textarea')[0].scrollHeight);
+                });
+                f = false;
+            });
+        });
+        
+    </script><!-- CopyRight, LegitSoulja. In Use Of AgarioHub.TK Servers -->
+    <!-- GITHUB >> https://github.com/LegitSoulja/OgarConsole/blob/master/cmd.html -->
+</body>
 </html>
