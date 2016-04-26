@@ -11,6 +11,8 @@ Ogar Unlimited tested - works
 Ogar-Plus tested - works (Changed serverLogLevel = 1)
 
 
+----------------------------------------------------------------------
+
 *Installation*
 
 1. Download OgarConsole
