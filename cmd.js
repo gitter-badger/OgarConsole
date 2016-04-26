@@ -6,7 +6,8 @@ app = express(),
 fs = require("fs"),
 server = require('http').createServer(app),
 io = require("socket.io").listen(server),
-cmd = require("node-cmd"),
+cmd = require("node-cmd")
+sys = require('sys'),
 exec = require('child_process').exec;
 
 // Console Port
@@ -14,18 +15,18 @@ server.listen(1000);
 
 console.log("[Console] Console running port 1000");
 
-app.get("/", function(req, res){
-	
-	fs.readFile(__dirname + "/cmd.html", function(err, data){
+	app.get("/", function(req, res){
 		
-		res.send("" + data);
-
+		fs.readFile(__dirname + "/cmd.html", function(err, data){
+			
+			res.send("" + data);
+		
+		});
+		
 	});
-	
-});
 
 io.sockets.on("connection", function(socket){
-	
+
 	socket.on("commandex", function(data){
 		
 		
@@ -33,8 +34,11 @@ io.sockets.on("connection", function(socket){
 			
 			socket.emit("input", "&#013;&#010;&#013;&#010" + stdout + stderr);
 			
+			console.log("[Console] " + data);
+			
 		});
 		
 	});
+	
 	
 });
