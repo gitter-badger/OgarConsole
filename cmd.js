@@ -1,4 +1,3 @@
-
 // Console port.
 var serverport = 1000,
 advanced = false,
@@ -33,7 +32,7 @@ console.log("[Console] Console running port " + serverport);
 		
 		fs.readFile(__dirname + "/cmd.html", function(err, data){
 			
-			exec.send("" + data);
+			res.send("" + data);
 			
 		
 		});
@@ -79,19 +78,6 @@ io.sockets.on("connection", function(socket){
 			
 		}
 		
-		// Handy note.. Enable this to send cmd commands. BEWARE! IF ENABLED, Enable Advanced mode true
-		
-		/*
-		
-		exec(data, function(error, stdout, stderr){
-	
-			socket.emit("input", "&#013;&#010;&#013;&#010" + stdout + stderr);
-			
-			console.log("[Console] " + data);
-			
-		});
-		
-		*/
 		
 	});
 	
