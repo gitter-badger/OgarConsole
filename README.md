@@ -12,7 +12,7 @@ Ogar ONLY. Ogar Unlimited coming soon.
 
 **REQUIRED**
 
-In './index.js' add the code below under 'var gameServer = new GameServer()'
+In './index.js' add the code below under 'var gameServer = new GameServer()' without quotes
 
 'exports.gameServer = gameServer;'
 
