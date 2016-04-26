@@ -1,6 +1,7 @@
 # OgarConsole
 
 OgarConsole Server Controller.
+Ogar ONLY. Ogar Unlimited coming soon.
 
 *Installation*
 
