@@ -3,9 +3,13 @@
 OgarConsole Server Controller.
 
 #Supported Servers
+
 Ogar tested - works
+
 Ogar Unlimited tested - works
+
 Ogar-Plus tested - works (Changed serverLogLevel = 1)
+
 
 *Installation*
 
