@@ -1,7 +1,8 @@
 # OgarConsole
 
 OgarConsole Server Controller.
-Ogar ONLY. Ogar Unlimited coming soon.
+#Ogar > https://github.com/OgarProject/Ogar
+#Ogar Unlimited > https://github.com/AJS-development/Ogar-unlimited
 
 *Installation*
 
