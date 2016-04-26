@@ -2,9 +2,10 @@
 
 OgarConsole Server Controller.
 
-Ogar > https://github.com/OgarProject/Ogar
-
-Ogar Unlimited > https://github.com/AJS-development/Ogar-unlimited
+#Supported Servers
+Ogar tested - works
+Ogar Unlimited tested - works
+Ogar-Plus tested - works (Changed serverLogLevel = 1)
 
 *Installation*
 
