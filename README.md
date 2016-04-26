@@ -8,7 +8,7 @@ Ogar tested - works
 
 Ogar Unlimited tested - works
 
-Ogar-Plus tested - works (Changed serverLogLevel = 1)
+Ogar-Plus tested - works (Change serverLogLevel = 1)
 
 
 ==================================================================
