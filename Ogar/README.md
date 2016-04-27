@@ -1,20 +1,35 @@
-# OgarConsole
+# OgarConsole v1.0.1
+![Image of OgarConsole] (http://i.imgur.com/iM539GC.png)
 
-OgarConsole Server Controller.
+> OgarConsole Supports
+- [x] Ogar
+- [x] Ogar Unlimited 11.9.0 or older
+- [ ] Ogar Unlimited latest (Will be released after stable Ogar Unlimited release)
+- [x] Ogar Plus (Enable ServerLogging)
 
-Ogar > https://github.com/OgarProject/Ogar
+## Installation
+1. Install Ogar and run Ogar and make sure the server starts without OgarConsole support
+2. Upload OgarConsole files to Ogar **./src** game directory.
+3. Run command 'npm install' in your Ogar file directory where OgarConsole was placed.
+4. Start **OgarConsole** by running the **startconsole.bat** file
 
-Ogar Unlimited > https://github.com/AJS-development/Ogar-unlimited
+## You know have Ogar Console Running. How to use?
+> Open your browser to the location **http://localhost:1000**
 
-*Installation*
+## Configuration
+> Open **cmd.js**
 
-1. Download OgarConsole
-2. Upload OgarConsole prior to your Ogar or Ogar Unlimited game directory
-3. Run command 'npm install' or install (Dependencies(express, socket.io, fs, http))
-4. Change console port in 'cmd.js'. Default (1000)
+- serverport = OgarConsole connection port.
+- advanced = Abilities to execute cmd commands (NOT RECOMMENDED TO ENABLE!).
+- log = Your console log file. This is needed to get access to the console log itself. Enable ServerLogging in game configuration **gameserver.ini**.
+- ogar = Ogar start file. The main file that runs Ogar.
+- json = Should require OgarConsole **package.json** file. Please make sure that it is included in the directory.
 
-Run 'startconsole.bat'
+## Help / Commands / Ogar Functionalites
+When OgarConsole is running and you have connected to **http://localhost:1000** type **help** in cmd to read help & commands of Ogar
 
-open browser to http://127.0.0.1:1000
+## Purchased OgarConsole?
+> You have been ripped off of buying OgarConsole and you should get a refund. OgarConsole is a free to use plugin.
 
-You will now have a console to run your game from in browser.
+## Donate
+> Not even necassary. This is free to use. Free for you
