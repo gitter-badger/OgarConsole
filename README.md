@@ -3,8 +3,8 @@
 
 > OgarConsole Supports
 - [x] Ogar
-- [x] Ogar Unlimited 11.9.0
-- [ ] Ogar Unlimited latest
+- [x] Ogar Unlimited 11.9.0 or older
+- [ ] Ogar Unlimited latest (Will be released after stable Ogar Unlimited release)
 - [x] Ogar Plus (Enable ServerLogging)
 
 ## Installation
