@@ -41,30 +41,6 @@
         
 		$(document).ready(function() {
 			
-			$.ajax({
-				
-				type: "GET",
-				url: "package.json",
-				dataType: "json",
-				success: function(data){
-					
-					$.each(data, function(index, element){
-						
-						$(title).append("OgarConsole " + element.version);
-						
-					})
-					
-				},
-				error: function(){
-					
-					alert("OgarConsole package.json file was not found.");
-					return;
-					
-				}
-				
-				
-			});
-			
 			var socket = io.connect();
 			var output = $("textarea");
 			var input = $(".input");
