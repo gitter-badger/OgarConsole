@@ -13,7 +13,7 @@
 3. Run command 'npm install' in your Ogar file directory where OgarConsole was placed.
 4. Start **OgarConsole** by running the **startconsole.bat** file
 
-## You know have Ogar Console Running. How to use?
+## You now have Ogar Console Running. How to use?
 > Open your browser to the location **http://localhost:1000**
 
 ## Configuration
