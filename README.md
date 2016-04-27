@@ -23,7 +23,7 @@
 - advanced = Abilities to execute cmd commands (NOT RECOMMENDED TO ENABLE!).
 - log = Your console log file. This is needed to get access to the console log itself. Enable ServerLogging in game configuration **gameserver.ini**.
 - ogar = Ogar start file. The main file that runs Ogar.
-- json - Should require OgarConsole **package.json** file. Please make sure that it is included in the directory.
+- json = Should require OgarConsole **package.json** file. Please make sure that it is included in the directory.
 
 ## Help / Commands / Ogar Functionalites
 When OgarConsole is running and you have connected to **http://localhost:1000** type **help** in cmd to read help & commands of Ogar
