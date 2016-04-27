@@ -1,39 +1,35 @@
-# OgarConsole
+# OgarConsole v1.0.1
+![Image of OgarConsole] (http://i.imgur.com/iM539GC.png)
 
-OgarConsole Server Controller.
+> OgarConsole Supports
+- [x] Ogar
+- [x] Ogar Unlimited 11.9.0
+- [ ] Ogar Unlimited latest
+- [x] Ogar Plus (Enable ServerLogging)
 
-#Supported Servers
+## Installation
+1. Install Ogar and run Ogar and make sure the server starts without OgarConsole support
+2. Upload OgarConsole files to Ogar **./src** game directory.
+3. Run command 'npm install' in your Ogar file directory where OgarConsole was placed.
+4. Start **OgarConsole** by running the **startconsole.bat** file
 
-Ogar tested - works
+## You know have Ogar Console Running. How to use?
+> Open your browser to the location **http://localhost:1000**
 
-Ogar Unlimited tested - works ( < 11.9.0  ONLY. Ogar Unlimited 11.9.0 Included )
+## Configuration
+> Open **cmd.js**
 
-Ogar Unlimited Latest - Under Development After Stable Release
+- serverport = OgarConsole connection port.
+- advanced = Abilities to execute cmd commands (NOT RECOMMENDED TO ENABLE!).
+- log = Your console log file. This is needed to get access to the console log itself. Enable ServerLogging in game configuration **gameserver.ini**.
+- ogar = Ogar start file. The main file that runs Ogar.
+- json = Should require OgarConsole **package.json** file. Please make sure that it is included in the directory.
+- 
+## Help / Commands / Ogar Functionalites
+When OgarConsole is running and you have connected to **http://localhost:1000** type **help** in cmd to read help & commands of Ogar
 
-Ogar-Plus tested - works (Change serverLogLevel = 1)
+## Purchased OgarConsole?
+> You have been ripped off of buying OgarConsole and you should get a refund. OgarConsole is a free to use plugin.
 
-
-[Install The Game Before Installing OgarConsole]
-
-*Installation*
-
-1. Download OgarConsole
-2. Upload OgarConsole prior to your Ogar or Ogar Unlimited game directory
-3. Run command 'npm install' or install (Dependencies(express, socket.io, fs, http))
-4. Change console port in 'cmd.js'. Default (1000)
-
-Run 'startconsole.bat'
-
-open browser to http://127.0.0.1:1000
-
-You now have a running console for your server.
-
-/
-/
-/
-
-Neither Ogar nor Ogar Unlimited?
-
-Instead of replacing the file index.js, simply place the code below under 'var gameServer = new GameServer();' in index.js
-
-exports.gameServer = gameServer;
+## Donate
+> Not even necassary. This is free to use. Free for you
