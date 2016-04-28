@@ -15,8 +15,8 @@ function OgarConsoleSettings(){
 	// Console Log > Set 'ServerLogLevel = 1' in gamesettings.ini, Else, You will get OgarConsole errors.
 	this.log = "./logs/console.log";
 	
-	// OgarConsole PHP File
-	this.consoleFile = "/cmd.php";
+	// OgarConsole PHP File. If file error replace with \cmd.php or /cmp.php
+	this.consoleFile = "\\cmd.php";
 	
 	// OgarConsole package.json. **REQUIRED**
 	this.json = require("./package.json");
@@ -63,9 +63,21 @@ server.on('error', function(err){
 
 // OgarConsole Listen For Connections.
 app.get("/", function(req, res) {
+	
     fs.readFile(__dirname + settings.consoleFile, function(err, data) {
-        res.send("" + data);
+    	
+    	if(err != "null" || err != " " || err != ""){
+    		
+    		res.send("" + data);	
+    		
+    	}else
+    	{
+    		
+    		return;
+    		
+    	}
     });
+    
 });
 
 // OgarConsole Socket Connection.
@@ -88,6 +100,12 @@ io.sockets.on("connection", function(socket) {
 				
 				switch(first){
 					
+					
+					// Ifyou want to disable some incoming command. Maybe the Ogar verison your using has a 
+					// command that you dont't want allowed you can redirect them here. 
+					
+					// Add any command you want to block || do other things.. Experience users only.
+					
 					case "clr":
 					fs.truncate(settings.log, "", function(){})
 					return;
@@ -97,6 +115,16 @@ io.sockets.on("connection", function(socket) {
 					return;
 					
 					case "exit":
+					
+						if(!settings.allowExit){
+							socket.emit("input", "You are not allowed to terminate this server!");
+							return;
+							
+						}
+						
+					break;
+					
+					case "stop":
 					
 						if(!settings.allowExit){
 							socket.emit("input", "You are not allowed to terminate this server!");
