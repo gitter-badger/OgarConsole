@@ -1,44 +1,76 @@
 'use strict'
-// Consle Port - Port Ogar console will listen on.
-var serverport = 1000,
-	// Advaned Mode - Execute cmd commands (NOT RECOMMENDED TO BE TRUE)
-    advanced = false,	
-	// Log File - Reads console log, output console log to OgarConsole. Enable Server Logging.
-	log = "./logs/console.log",
-    // Start Script for Ogar
-    ogar = require('./index'),
-	json = require("./package.json"),
-	version = json.version,
-	// GameServer
-	gameServer = ogar.gameServer,
-    express = require("express"),
-    app = express(),
-    fs = require("fs"),
-    server = require('http').createServer(app),
-    io = require("socket.io").listen(server),
-    exec = require('child_process').exec;
+
+// OgarConsole Settings
+function OgarConsoleSettings(){
 	
-// Run Ogar
-// Add command handler
+	// OgarConsole Port
+	this.serverPort = 1000;
+	
+	// Advanced Mode (NOT RECOMMENDED TO BE TRUE)
+	this.advanced = false;
 
-// Listen for console
-server.listen(serverport);
-console.log("[Console] Console running port " + serverport);
+	// Console Log > Set 'ServerLogLevel = 1' in gamesettings.ini, Else, You will get OgarConsole errors.
+	this.log = "./logs/console.log";
+	
+	// OgarConsole PHP File
+	this.consoleFile = "/cmd.php";
+	
+	// OgarConsole package.json. **REQUIRED**
+	this.json = require("./package.json");
+	
+	// OgarConsole Version
+	this.version = this.json.version;
+	
+}
 
-// HTTP Listen.
+//
+// DO NOT EDIT BELOW
+//
+
+var ogar = require('./index'),
+settings = new OgarConsoleSettings(),
+gameServer = ogar.gameServer,
+express = require("express"),
+app = express(),
+fs = require("fs"),
+server = require('http').createServer(app),
+io = require("socket.io").listen(server),
+exec = require('child_process').exec;
+
+//
+// DO NOT EDIT ABOVE
+//
+
+// Create new connection, and listen on port serverPort.
+server.listen(settings.serverPort);
+console.log("[OgarConsole] Running on port " + settings.serverPort);
+
+app.set("title", "OgarConsole > " + settings.version);
+
+// OgarConsole Server Start Error
+server.on('error', function(err){
+	
+	console.log("[OgarConsole] Could not listen on port " + settings.serverPort + ". Try using a different port.");
+    console.log("[Console] Ogar and OgarConsole stopped..");
+    gameServer.socketServer.close();
+    process.exit(1);
+	return;
+	
+});
+
+// OgarConsole Listen For Connections.
 app.get("/", function(req, res) {
-    fs.readFile(__dirname + "/cmd.php", function(err, data) {
+    fs.readFile(__dirname + settings.consoleFile, function(err, data) {
         res.send("" + data);
     });
 });
 
-var logThis;
-
+// OgarConsole Socket Connection.
 io.sockets.on("connection", function(socket) {
 	
     socket.on("commandex", function(data) {
 		
-        if (!advanced) {
+        if (!settings.advanced) {
 			
             try {
                 gameServer.log.onCommand(data);
@@ -53,7 +85,7 @@ io.sockets.on("connection", function(socket) {
 				
 				if(first === "clr" || first === "clear"){
 					
-					fs.truncate(log, "", function(){ })
+					fs.truncate(settings.log, "", function(){})
 					return;
 					
 				}
@@ -62,7 +94,7 @@ io.sockets.on("connection", function(socket) {
 					
                     execute(gameServer, split);
 					
-                    fs.readFile(log, function(
+                    fs.readFile(settings.log, function(
                         err, data) {
                         var a = data.toString();
                         var clog = a.split("\n");
@@ -82,6 +114,11 @@ io.sockets.on("connection", function(socket) {
             }
         }else{
 			
+			// Advanced Mode.. Executes pure cmd commands, instead of Ogar game commands.
+			// This is very dangerous to have enabled, this could leave serious damage to your server
+			// If you don't know what you are doing. Please keep advanced mode false, unless you know what you
+			// Are doing!.
+			
 			exec(data, function(e,s,t){
 				
 				socket.emit("input", s);
@@ -92,4 +129,12 @@ io.sockets.on("connection", function(socket) {
 		}
     });
 });
-exec("title OgarConsole " + version + "/ Port " + serverport, function(e, s, t) {})
+
+// Set CMD Title 
+exec("title OgarConsole " + settings.version + "/ Port " + settings.serverPort, function(e, s, t) {})
+
+
+
+//
+// END OF FILE
+//
