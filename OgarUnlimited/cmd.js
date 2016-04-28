@@ -4,7 +4,7 @@
 function OgarConsoleSettings(){
 	
 	// OgarConsole Port
-	this.serverPort = 1000;
+	this.serverPort = 8866;
 	
 	// Advanced Mode (NOT RECOMMENDED TO BE TRUE)
 	this.advanced = false;
@@ -13,7 +13,8 @@ function OgarConsoleSettings(){
 	this.allowExit = false;
 
 	// Console Log > Set 'ServerLogLevel = 1' in gamesettings.ini, Else, You will get OgarConsole errors.
-	this.log = "./logs/console.log";
+	// If file error replace with \cmd.php or /cmp.php.
+	this.log = "\\logs\\console.log";
 	
 	// OgarConsole PHP File. If file error replace with \cmd.php or /cmp.php
 	this.consoleFile = "\\cmd.php";
@@ -144,7 +145,7 @@ io.sockets.on("connection", function(socket) {
 					
                     execute(gameServer, split);
 					
-                    fs.readFile(settings.log, function(
+                    fs.readFile(__dirname + settings.log, function(
                         err, data) {
                         var a = data.toString();
                         var clog = a.split("\n");
