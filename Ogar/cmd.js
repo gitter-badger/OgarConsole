@@ -8,6 +8,9 @@ function OgarConsoleSettings(){
 	
 	// Advanced Mode (NOT RECOMMENDED TO BE TRUE)
 	this.advanced = false;
+	
+	// Enable this to allow the server to be terminated. False make this server non stoppable.
+	this.allowExit = false;
 
 	// Console Log > Set 'ServerLogLevel = 1' in gamesettings.ini, Else, You will get OgarConsole errors.
 	this.log = "./logs/console.log";
@@ -83,10 +86,29 @@ io.sockets.on("connection", function(socket) {
                 var first = split[0].toLowerCase();
                 var execute = gameServer.commands[first];
 				
-				if(first === "clr" || first === "clear"){
+				switch(first){
 					
+					case "clr":
 					fs.truncate(settings.log, "", function(){})
 					return;
+					
+					case "clear":
+					fs.truncate(settings.log, "", function(){})
+					return;
+					
+					case "exit":
+					
+						if(!settings.allowExit){
+							socket.emit("input", "You are not allowed to terminate this server!");
+							return;
+							
+						}
+						
+					break;
+					
+					case "start":
+					return;
+					
 					
 				}
 				
