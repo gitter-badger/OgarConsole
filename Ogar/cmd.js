@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // OgarConsole Settings
 function OgarConsoleSettings(){
