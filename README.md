@@ -1,4 +1,4 @@
-# OgarConsole v1.0.1
+# OgarConsole v1.0.2
 ![Image of OgarConsole] (http://i.imgur.com/iM539GC.png)
 
 > OgarConsole Supports
