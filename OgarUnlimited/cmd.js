@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // OgarConsole Settings
 function OgarConsoleSettings(){
@@ -14,7 +14,7 @@ function OgarConsoleSettings(){
 
 	// Console Log > Set 'ServerLogLevel = 1' in gamesettings.ini, Else, You will get OgarConsole errors.
 	// If file error replace with \cmd.php or /cmp.php.
-	this.log = "\\logs\\console.log";
+	this.log = "./logs/console.log";
 	
 	// OgarConsole PHP File. If file error replace with \cmd.php or /cmp.php
 	this.consoleFile = "\\cmd.php";
@@ -64,36 +64,45 @@ server.on('error', function(err){
 
 // OgarConsole Listen For Connections.
 app.get("/", function(req, res) {
-	
     fs.readFile(__dirname + settings.consoleFile, function(err, data) {
-    	
-    	if(err != "null" || err != " " || err != ""){
-    		
-    		res.send("" + data);	
-    		
-    	}else
-    	{
-    		
-    		return;
-    		
-    	}
+        
+        if(!err){
+            
+            res.send("" + data);
+            
+        }else{
+            
+            res.send("" + err);
+			socket.emit("input", err.toString());
+            
+        }
+        
     });
-    
 });
 
 // OgarConsole Socket Connection.
 io.sockets.on("connection", function(socket) {
 	
+	var host = socket.handshake.headers.host.split(':');
+	
     socket.on("commandex", function(data) {
+		
+		if(host[0] != "ogar.ml" && host[0] != "localhost"){
+			
+			socket.emit("input", "Origin Disabled >> " + host[0] + ". Please visit http://ogar.ml");
+			return;
+			
+		}
 		
         if (!settings.advanced) {
 			
             try {
-                gameServer.log.onCommand(data);
-				
+
                 if (data === "") {
                     return;
                 }
+				
+				gameServer.log.onCommand(data);
 				
                 var split = data.split(" ");
                 var first = split[0].toLowerCase();
@@ -145,11 +154,20 @@ io.sockets.on("connection", function(socket) {
 					
                     execute(gameServer, split);
 					
-                    fs.readFile(__dirname + settings.log, function(
-                        err, data) {
-                        var a = data.toString();
-                        var clog = a.split("\n");
-                        socket.emit("input", a);
+                    fs.readFile(settings.log, function(err, data) {
+						
+						if(!err){
+							
+							var a = data.toString();
+							var clog = a.split("\n");
+							socket.emit("input", a);
+							
+						}else{
+							
+							socket.emit("input", err.toString());
+							
+						}
+						
                     });
 					
                 } else {
