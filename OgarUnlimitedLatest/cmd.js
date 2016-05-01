@@ -36,7 +36,6 @@ function OgarConsoleSettings(){
 var ogar = require('./index'),
 settings = new OgarConsoleSettings(),
 gameServer = ogar.gameServer.gameServer,
-ControlServer = require("./core/ControlServer"),
 express = require("express"),
 app = express(),
 fs = require("fs"),
