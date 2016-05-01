@@ -59,7 +59,7 @@ server.on('error', function(err){
     console.log("[Console] Ogar and OgarConsole stopped..");
     gameServer.socketServer.close();
     process.exit(1);
-	return;
+    return;
 	
 });
 
@@ -74,7 +74,7 @@ app.get("/", function(req, res) {
         }else{
             
             res.send("" + err);
-			socket.emit("input", err.toString());
+            socket.emit("input", err.toString());
             
         }
         
