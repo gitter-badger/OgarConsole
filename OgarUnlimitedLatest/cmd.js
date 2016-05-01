@@ -33,7 +33,7 @@ function OgarConsoleSettings(){
 
 var ogar = require('./index'),
 settings = new OgarConsoleSettings(),
-gameServer = ogar.gameServer,
+gameServer = ogar.gameServer.gameServer,
 ControlServer = require("./core/ControlServer"),
 express = require("express"),
 app = express(),
@@ -103,7 +103,7 @@ io.sockets.on("connection", function(socket) {
                     return;
                 }
 				
-				gameServer.gameServer.log.onCommand(data);
+				gameServer.log.onCommand(data);
 				
                 var split = data.split(" ");
                 var first = split[0].toLowerCase();
@@ -153,7 +153,7 @@ io.sockets.on("connection", function(socket) {
 				
                 if (typeof execute != 'undefined') {
 					
-                    execute(gameServer.gameServer, split);
+                    execute(gameServer, split);
 					
                     fs.readFile(settings.log, function(err, data) {
 						
