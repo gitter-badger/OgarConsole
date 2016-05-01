@@ -1,4 +1,6 @@
 # OgarConsole v1.0.2
+
+[![Join the chat at https://gitter.im/LegitSoulja/OgarConsole](https://badges.gitter.im/LegitSoulja/OgarConsole.svg)](https://gitter.im/LegitSoulja/OgarConsole?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![Image of OgarConsole] (http://i.imgur.com/iM539GC.png)
 
 > OgarConsole Supports
