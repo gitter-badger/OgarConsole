@@ -4,8 +4,8 @@
 > OgarConsole Supports
 - [x] Ogar
 - [x] Ogar Unlimited 11.9.0 or older
-- [ ] Ogar Unlimited latest (In Development)
-- [x] Ogar Plus (Enable ServerLogging)
+- [x] Ogar Unlimited latest
+- [x] Ogar Plus
 
 ## Installation
 1. Install Ogar and run Ogar and make sure the server starts without OgarConsole support
