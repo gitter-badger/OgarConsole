@@ -59,7 +59,7 @@ server.on('error', function(err){
     console.log("[Console] Ogar and OgarConsole stopped..");
     gameServer.socketServer.close();
     process.exit(1);
-    return;
+	return;
 	
 });
 
@@ -74,7 +74,7 @@ app.get("/", function(req, res) {
         }else{
             
             res.send("" + err);
-            socket.emit("input", err.toString());
+			socket.emit("input", err.toString());
             
         }
         
@@ -103,13 +103,13 @@ io.sockets.on("connection", function(socket) {
                     return;
                 }
 				
-				gameServer.log.onCommand(data);
+                gameServer.log.onCommand(data);
 				
                 var split = data.split(" ");
                 var first = split[0].toLowerCase();
                 var execute = gameServer.consoleService.commands[first];
 				
-				switch(first){
+                switch(first){
 					
 					
 					// Ifyou want to disable some incoming command. Maybe the Ogar verison your using has a 
