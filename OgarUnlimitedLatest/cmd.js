@@ -6,7 +6,7 @@
 function OgarConsoleSettings(){
 	
 	// OgarConsole Port
-	this.serverPort = 2000;
+	this.serverPort = 1000;
 	
 	// Advanced Mode (NOT RECOMMENDED TO BE TRUE)
 	this.advanced = false;
