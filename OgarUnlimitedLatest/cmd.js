@@ -1,10 +1,12 @@
+/* global socket */
+
 'use strict';
 
 // OgarConsole Settings
 function OgarConsoleSettings(){
 	
 	// OgarConsole Port
-	this.serverPort = 1000;
+	this.serverPort = 2000;
 	
 	// Advanced Mode (NOT RECOMMENDED TO BE TRUE)
 	this.advanced = false;
@@ -59,41 +61,34 @@ server.on('error', function(err){
     console.log("[Console] Ogar and OgarConsole stopped..");
     gameServer.socketServer.close();
     process.exit(1);
-	return;
+    return;
 	
 });
 
 // OgarConsole Listen For Connections.
 app.get("/", function(req, res) {
     fs.readFile(__dirname + settings.consoleFile, function(err, data) {
-        
         if(!err){
-            
             res.send("" + data);
-            
         }else{
-            
             res.send("" + err);
-			socket.emit("input", err.toString());
-            
+            socket.emit("input", err.toString());
         }
-        
     });
 });
 
 // OgarConsole Socket Connection.
 io.sockets.on("connection", function(socket) {
 	
-	var host = socket.handshake.headers.host.split(':');
+    var host = socket.handshake.headers.host.split(':');
 	
     socket.on("commandex", function(data) {
 		
-		if(host[0] !== "ogar.ml" && host[0] !== "localhost"){
+        if(host[0] !== "ogar.ml" && host[0] !== "localhost"){
+            socket.emit("input", "Origin Disabled >> " + host[0] + ". Please visit http://ogar.ml");
+            return;
 			
-			socket.emit("input", "Origin Disabled >> " + host[0] + ". Please visit http://ogar.ml");
-			return;
-			
-		}
+        }
 		
         if (!settings.advanced) {
 			
@@ -112,44 +107,37 @@ io.sockets.on("connection", function(socket) {
                 switch(first){
 					
 					
-					// Ifyou want to disable some incoming command. Maybe the Ogar verison your using has a 
-					// command that you dont't want allowed you can redirect them here. 
+                    // Ifyou want to disable some incoming command. Maybe the Ogar verison your using has a 
+                    // command that you dont't want allowed you can redirect them here. 
+                    // Add any command you want to block || do other things.. Experience users only.
 					
-					// Add any command you want to block || do other things.. Experience users only.
+                    case "clr":
+                        fs.truncate(settings.log, "", function(){})
+                        return;
+                        
+                    case "clear":
+                        fs.truncate(settings.log, "", function(){})
+                        return;
 					
-					case "clr":
-					fs.truncate(settings.log, "", function(){})
-					return;
-					
-					case "clear":
-					fs.truncate(settings.log, "", function(){})
-					return;
-					
-					case "exit":
-					
-						if(!settings.allowExit){
-							socket.emit("input", "You are not allowed to terminate this server!");
-							return;
-							
-						}
+                    case "exit":		
+                        if(!settings.allowExit){
+                            socket.emit("input", "You are not allowed to terminate this server!");
+                        return;				
+                    }
 						
-					break;
+                    break;
 					
-					case "stop":
+                    case "stop":		
+                        if(!settings.allowExit){
+                            socket.emit("input", "You are not allowed to terminate this server!");
+                            return;
+                        }
+                        break;
 					
-						if(!settings.allowExit){
-							socket.emit("input", "You are not allowed to terminate this server!");
-							return;
+                    case "start":
+                        return;
 							
-						}
-						
-					break;
-					
-					case "start":
-					return;
-					
-					
-				}
+                }
 				
                 if (typeof execute != 'undefined') {
 					
@@ -157,18 +145,18 @@ io.sockets.on("connection", function(socket) {
 					
                     fs.readFile(settings.log, function(err, data) {
 						
-						if(!err){
+                        if(!err){
 							
-							var a = data.toString();
-							var clog = a.split("\n");
-							socket.emit("input", a);
+                            var a = data.toString();
+                            var clog = a.split("\n");
+                            socket.emit("input", a);
 							
-						}else{
+                        }else{
 							
-							socket.emit("input", err.toString());
+                            socket.emit("input", err.toString());
 							
-						}
-						
+                        }
+                        
                     });
 					
                 } else {
@@ -183,21 +171,23 @@ io.sockets.on("connection", function(socket) {
 				
             }
         }else{
+            
+            // Advanced Mode.. Executes pure cmd commands, instead of Ogar game commands.
+            // This is very dangerous to have enabled, this could leave serious damage to your server
+            // If you don't know what you are doing. Please keep advanced mode false, unless you know what you
+            // Are doing!.
 			
-			// Advanced Mode.. Executes pure cmd commands, instead of Ogar game commands.
-			// This is very dangerous to have enabled, this could leave serious damage to your server
-			// If you don't know what you are doing. Please keep advanced mode false, unless you know what you
-			// Are doing!.
-			
-			exec(data, function(e,s,t){
+            exec(data, function(e,s,t){
 				
-				socket.emit("input", s);
-				return;
+                socket.emit("input", s);
+                return;
 				
-			});
+            });
 			
-		}
+        }
+        
     });
+    
 });
 
 // Set CMD Title 
